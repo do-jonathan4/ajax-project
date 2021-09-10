@@ -11,17 +11,25 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
-  <h1>Chuck Norris Facts</h1>
-  <p>What do you want to know about Chuck Norris?</p>
-  <input type="text" id="factInput">
-  <div>
-    <button id="factBtn">Give me anything</button>
-  </div>
+<body class="bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto bg-primary text-white mt-5 p-4">
 
-  <div id="factDiv">
-    <h2>Did you know:</h2>
-    <p id="factText"></p>
+        <h1>Chuck Norris Facts</h1>
+        <p>What do you want to know about Chuck Norris?</p>
+        <input type="text" id="factInput" class="form-control form-control-lg">
+        <div>
+          <button id="factRandom">Give me anything</button>
+        </div>
+
+        <div id="factDiv">
+          <h2>Did you know:</h2>
+          <p id="factText"></p>
+
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="js/data.js"></script>
