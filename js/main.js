@@ -15,6 +15,7 @@ function getFact() {
 
   xhr.onload = function() {
     if (this.status === 200) {
+      factDiv.style.display = 'block'
       const obj = JSON.parse(this.responseText)
       factText.innerText = obj.value
     }
@@ -30,6 +31,7 @@ function randomFact() {
   xhr.open('GET', 'https://api.chucknorris.io/jokes/random')
 
   xhr.onload = function () {
+    factDiv.style.display = 'block'
     const obj = JSON.parse(this.responseText)
     factText.innerText = obj.value
   }
