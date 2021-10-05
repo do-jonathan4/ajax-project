@@ -11,7 +11,7 @@ A web application for those on break who want to look at Chuck Norris facts.
 - User can generate a random joke without a search.
 - User can view a joke.
 
-## User features
+## Preview
 ![alt text](images/app-preview.gif)
 
 ## [Live](https://do-jonathan4.github.io/ajax-project/)
