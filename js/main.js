@@ -1,40 +1,48 @@
-let factInput = document.getElementById('factInput')
-let factBtn = document.getElementById('factBtn')
-let factDiv = document.getElementById('factDiv')
-let factText = document.getElementById('factText')
-let factRandom = document.getElementById('factRandom')
+const factInput = document.getElementById('factInput')
+const factBtn = document.getElementById('factBtn')
+const factDiv = document.getElementById('factDiv')
+const factErr = document.getElementById('factErr')
+const factText = document.getElementById('factText')
+const factRandom = document.getElementById('factRandom')
+let timeout = null
 
-factInput.addEventListener('input', getFact)
-factRandom.addEventListener('click', randomFact)
-
-function getFact() {
-  let fact = factInput.value
+const sentHttpRequest = (method, url) => {
   let xhr = new XMLHttpRequest()
 
-  xhr.open('GET', 'https://api.chucknorris.io/jokes/random?category='+fact)
+  xhr.open(method, url)
 
-  xhr.onload = function() {
-    if (this.status === 200) {
+  xhr.onload = () => {
+    if (xhr.status === 200) {
       factDiv.style.display = 'block'
-      const obj = JSON.parse(this.responseText)
+      factErr.style.display = 'none'
+      const obj = JSON.parse(xhr.responseText)
       factText.innerText = obj.value
+    } else {
+      factDiv.style.display = 'none'
+      factErr.style.display = 'block'
     }
   }
 
   xhr.send()
 }
+const getFact = () => {
+  const fact = factInput.value
+  clearTimeout(timeout)
 
-function randomFact() {
-  factInput.value = ''
-  let xhr = new XMLHttpRequest()
-
-  xhr.open('GET', 'https://api.chucknorris.io/jokes/random')
-
-  xhr.onload = function () {
-    factDiv.style.display = 'block'
-    const obj = JSON.parse(this.responseText)
-    factText.innerText = obj.value
-  }
-
-  xhr.send()
+  timeout = setTimeout(() => {
+    if (fact === '') {
+      factDiv.style.display = 'none'
+      factErr.style.display = 'none'
+      return
+    }
+    sentHttpRequest('GET', 'https://api.chucknorris.io/jokes/random?category=' + fact)
+  }, 1000)
 }
+
+const randomFact = () => {
+  factInput.value = ''
+  sentHttpRequest('GET', 'https://api.chucknorris.io/jokes/random')
+}
+
+factInput.addEventListener('input', getFact)
+factRandom.addEventListener('click', randomFact)
